@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Link tailwind css -->
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <!-- Link boxicons css -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Link angular js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        input.ng-invalid.ng-dirty{
+            border: 1px solid red;
+            outline: red;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="fixed flex items-center justify-center inset-0 z-10" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="bg-white w-80 lg:h-4/6 md:w-96 rounded p-5">
+            <h1 class="font-bold text-4xl text-center">Đăng nhập</h1>
+            <div class="flex justify-center flex-col text-center lg:flex-row text-base mt-5">
+                <p>Nếu bạn chưa có tài khoản?</p>
+                <a href="#" class="text-purple-700">Tạo tài khoản mới</a>
+            </div>
+            <form class="mt-6 flex flex-col text-base" name="myForm" ng-submit="myFunc()">
+                <label for="email" class="w-24 text-gray-500">Email</label>
+                <input 
+                    id="email" 
+                    name="email" 
+                    class="mt-3.5 border-gray-300 border-2 border-solid rounded-md px-1 py-1" placeholder="email"
+                    type="email" 
+                    required
+                    ng-model="user.email">
+                <span class="text-red-600 text-xs" ng-show="myForm.email.$dirty && myForm.email.$error.required">
+                    Vui lòng nhập email!</span>
+                <span class="text-red-600 text-xs" ng-show="myForm.email.$dirty && myForm.email.$error.email">
+                    Email không hợp lệ!</span>
+                <label for="password" class="mt-4 w-24 text-gray-500">Mật khẩu</label>
+                <input id="password" name="password" type="password"
+                    class="mt-3.5 border-gray-300 border-2 border-solid rounded-md px-1 py-1" placeholder="Mật khẩu"
+                    required ng-minlength="5" ng-maxlength="10" ng-model="user.password">
+                <span class="text-red-600 text-xs"
+                    ng-show="myForm.password.$dirty && myForm.password.$error.required">Vui lòng nhập mật khẩu!</span>
+                <span class="text-red-600 text-xs"
+                    ng-show="myForm.password.$dirty && myForm.password.$error.minlength">Vui lòng nhập tối thiểu 5 ký
+                    tự!</span>
+                <span class="text-red-600 text-xs"
+                    ng-show="myForm.password.$dirty && myForm.password.$error.maxlength">Vui lòng nhập tối đa 10 ký
+                    tự!</span>
+
+                <a href="#">Quên mật khẩu?</a>
+                <div class="mt-4 flex flex-col items-center justify-between">
+                    <button type="submit" class="w-full bg-purple-700 rounded-3xl py-2 text-white font-bold btn-login"
+                        ng-disabled="myForm.$invalid">Đăng nhập</button>
+                    <div class="mx-4 my-1.5 flex items-center w-full">
+                        <span class="flex-1 border-b-gray-200 border-b-2"></span>
+                        <span class="mx-4">hoặc</span>
+                        <span class="flex-1 border-b-gray-200 border-b-2"></span>
+                    </div>
+                    <div class="flex flex-row w-full">
+                        <div class="w-full bg-sky-600 rounded-3xl py-1.5 text-white items-center text-center mr-1">
+                            <a href="https://www.facebook.com/" class="w-full block">
+                                <i class='bx bxl-facebook-circle text-2xl'></i>
+                            </a>
+                        </div>
+                        <div
+                            class="w-full border-gray-300 border-2 border-solid rounded-3xl py-1.5 items-center text-center ml-1.5">
+                            <a href="https://www.google.com/" class="w-full block">
+                                <i class='bx bxl-google text-2xl'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function ($scope) {
+            $scope.myFunc = function () {
+                console.log($scope.user);
+            }
+        });
+    </script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
